@@ -3,10 +3,10 @@ from abc import abstractmethod, ABC
 import pygame
 
 from PySimEngine.EntityManager import EntityManager
-from PySimEngine.Input import Input
+from PySimEngine.InputManager import InputManager
 
 
-class Game(ABC):
+class Scenario(ABC):
     """
     The abstract base class for any game built with this framework.
     It handles the main game loop and system management. The user only needs to
@@ -28,7 +28,7 @@ class Game(ABC):
         self._paused = False
         self._speed = 1.0
 
-        self.input_manager = Input()
+        self.input_manager = InputManager()
         self.entity_manager = EntityManager()
 
         self.create_initial_entities()
@@ -53,11 +53,6 @@ class Game(ABC):
         Use `self.entity_manager.add()` to create the starting
         objects for your game.
         """
-        pass
-
-    @abstractmethod
-    def custom_updates(self):
-        """"""
         pass
 
     def stop(self):
@@ -98,8 +93,10 @@ class Game(ABC):
             if not self._paused:
                 delta_time = self._speed * raw_delta_time_ms / 1000.0
 
-                self.custom_updates()
                 self.entity_manager.apply_changes()
+
+                for entity in self.entity_manager.get_entities():
+                    entity.calculate_physics(delta_time, self)
 
                 for entity in self.entity_manager.get_entities():
                     entity.update(delta_time, self)

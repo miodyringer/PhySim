@@ -1,7 +1,7 @@
 import pygame
 
 
-class Input:
+class InputManager:
     """Manages keyboard input states."""
     def __init__(self):
         self._current_keys = pygame.key.get_pressed()

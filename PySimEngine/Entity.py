@@ -8,6 +8,10 @@ class Entity(ABC):
         self.position = pygame.Vector2(x, y)
 
     @abstractmethod
+    def calculate_physics(self, delta_time: float, game):
+        pass
+
+    @abstractmethod
     def update(self, delta_time, game):
         """
         Update logic for the entity.
