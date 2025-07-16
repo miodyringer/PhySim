@@ -15,7 +15,7 @@ class GravityCircle(Entity, Movable, Collision, Mass, ReceiveForce):
     A circle entity that is movable, can collide, has mass, receives forces (like gravity),
     and is affected by a LocalGravity handler.
     """
-    def __init__(self, x: float, y: float, radius: float, color: tuple,
+    def __init__(self, x: int, y: int, radius: float, color: tuple,
                  initial_velocity: pygame.Vector2, mass: float = 1.0,
                  restitution: float = 0.8):
         Entity.__init__(self, x, y)
@@ -31,28 +31,21 @@ class GravityCircle(Entity, Movable, Collision, Mass, ReceiveForce):
         self.color = color
         self.radius = radius
 
-        self._net_force_accumulated = pygame.Vector2(0, 0)
-        self._pending_velocity_change = pygame.Vector2(0, 0)
-        self._pending_position_correction = pygame.Vector2(0, 0)
+        self.net_force_accumulated = pygame.Vector2(0, 0)
+        self.pending_velocity_change = pygame.Vector2(0, 0)
+        self.pending_position_correction = pygame.Vector2(0, 0)
 
 
     def apply_force(self, force: pygame.Vector2, delta_time: float):
-        """Applies a force to the circle, accumulating it for the current frame's physics calculation."""
-        self._net_force_accumulated += force
+        self.net_force_accumulated += force
 
     def apply_movement(self, delta_time: float):
-        """This method from Movable is mostly handled by apply_physics_update directly for PhysicsBody."""
         pass
 
     def get_collision_shape(self) -> CircleShape:
-        """Returns the circle's shape for collision detection."""
         return self._shape
 
     def resolve_collision(self, other: 'Collision'):
-        """
-        Calculates collision resolution (position correction and velocity impulse)
-        and stores them in pending variables. Does NOT apply changes immediately.
-        """
         if isinstance(other, GravityCircle):
             other_circle = other
             distance = self.position.distance_to(other_circle.position)
@@ -62,8 +55,8 @@ class GravityCircle(Entity, Movable, Collision, Mass, ReceiveForce):
                 overlap = combined_radii - distance
                 direction = (self.position - other_circle.position).normalize()
 
-                self._pending_position_correction += direction * (overlap / 2)
-                other_circle._pending_position_correction -= direction * (overlap / 2)
+                self.pending_position_correction += direction * (overlap / 2)
+                other_circle.pending_position_correction -= direction * (overlap / 2)
 
                 relative_velocity = self.velocity - other_circle.velocity
                 velocity_along_normal = relative_velocity.dot(direction)
@@ -74,26 +67,20 @@ class GravityCircle(Entity, Movable, Collision, Mass, ReceiveForce):
                     j /= (1 / self.mass) + (1 / other_circle.mass)
 
                     impulse = j * direction
-                    self._pending_velocity_change += impulse / self.mass
-                    other_circle._pending_velocity_change -= impulse / other_circle.mass
+                    self.pending_velocity_change += impulse / self.mass
+                    other_circle.pending_velocity_change -= impulse / other_circle.mass
 
     def get_mass(self) -> float:
-        """Returns the mass of the circle."""
         return self.mass
 
 
     def calculate_physics(self, delta_time: float, scenario: Scenario):
-        """
-        Phase 1: Accumulates forces and calculates collision effects.
-        Does NOT modify position or velocity directly.
-        """
-
         if hasattr(scenario, 'local_gravity_handler') and isinstance(scenario.local_gravity_handler, LocalGravity):
             gravity_force = self.get_mass() * scenario.local_gravity_handler.gravity_vector
             self.apply_force(gravity_force, delta_time)
 
-        self._pending_velocity_change = pygame.Vector2(0, 0)
-        self._pending_position_correction = pygame.Vector2(0, 0)
+        self.pending_velocity_change = pygame.Vector2(0, 0)
+        self.pending_position_correction = pygame.Vector2(0, 0)
 
         for other_entity in scenario.entity_manager.get_entities():
             if other_entity is not self and isinstance(other_entity, Collision):
@@ -101,17 +88,13 @@ class GravityCircle(Entity, Movable, Collision, Mass, ReceiveForce):
                     self.resolve_collision(other_entity)
 
     def update(self, delta_time: float, scenario: Scenario):
-        """
-        Phase 2: Applies accumulated forces, pending collision changes,
-        and moves the entity. Handles screen border collisions.
-        """
         if self.mass > 0:
-            acceleration = self._net_force_accumulated / self.mass
+            acceleration = self.net_force_accumulated / self.mass
             self.velocity += acceleration * delta_time
-        self._net_force_accumulated = pygame.Vector2(0, 0)
+        self.net_force_accumulated = pygame.Vector2(0, 0)
 
-        self.velocity += self._pending_velocity_change
-        self.position += self._pending_position_correction
+        self.velocity += self.pending_velocity_change
+        self.position += self.pending_position_correction
 
         self.position += self.velocity * delta_time
 
@@ -135,5 +118,4 @@ class GravityCircle(Entity, Movable, Collision, Mass, ReceiveForce):
             if abs(self.velocity.y) < 0.1: self.velocity.y = 0
 
     def render(self, surface: pygame.Surface):
-        """Renders the circle on the screen."""
         self._shape.render_shape(surface, self.position, self.color)

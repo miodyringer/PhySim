@@ -11,7 +11,7 @@ class GlobalGravity:
         """
         Initializes the global gravity handler.
         :param gravitational_constant: The gravitational constant (G) for the simulation.
-                                       Adjust this value to control the strength of gravity in your pixel world.
+                                       Adjust this value to control the strength of gravity in your scenario.
         """
         self.G = gravitational_constant
 

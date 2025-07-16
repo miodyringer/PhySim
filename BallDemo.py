@@ -22,7 +22,7 @@ class BallDemo(Scenario):
         }
 
     def create_initial_entities(self):
-        for i in range(100):
+        for i in range(50):
             ball = GravityCircle(random() * 1024, random() * 768, 10, (random() * 255, random() * 255, random() * 255),
                                   pygame.Vector2(random() * 100, random() * 100), mass=1.0, restitution=0.3)
             self.entity_manager.add(ball)

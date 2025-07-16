@@ -5,7 +5,7 @@ class LocalGravity:
     def __init__(self, gravity_vector: pygame.Vector2):
         """
         Initializes the local gravity handler.
-        :param gravity_vector: A pygame.Vector2 representing the acceleration due to gravity (e.g., (0, 9.81) for down).
+        :param gravity_vector: A pygame.Vector2 representing the acceleration).
         """
         self.gravity_vector = gravity_vector
 

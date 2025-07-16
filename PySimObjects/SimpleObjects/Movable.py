@@ -7,5 +7,8 @@ class Movable(ABC):
 
     @abstractmethod
     def apply_movement(self, delta_time: float):
-        """Applies movement based on velocity and delta_time."""
+        """
+        Applies movement based on velocity and delta_time.
+        :param delta_time: The time between frames
+        """
         pass

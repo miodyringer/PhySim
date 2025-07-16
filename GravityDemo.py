@@ -23,8 +23,8 @@ class GravityDemo(Scenario):
         }
 
     def create_initial_entities(self):
-        central_x = self._width / 2
-        central_y = self._height / 2
+        central_x = self.width / 2
+        central_y = self.height / 2
         self.entity_manager.add(
             CircleOrbital(
                 x=central_x,

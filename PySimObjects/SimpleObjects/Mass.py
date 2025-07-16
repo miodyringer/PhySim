@@ -8,5 +8,7 @@ class Mass(ABC):
 
     @abstractmethod
     def get_mass(self) -> float:
-        """Returns the mass of the entity."""
+        """
+        Returns the mass of the entity.
+        """
         pass

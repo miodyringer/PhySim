@@ -15,18 +15,18 @@ class Scenario(ABC):
 
     def __init__(self):
         config = self.configure()
-        self._width = config.get("width", 800)
-        self._height = config.get("height", 600)
-        self._title = config.get("title", "Pygame Framework")
-        self._tps = config.get("tps", 60)
+        self.width = config.get("width", 800)
+        self.height = config.get("height", 600)
+        self.title = config.get("title", "Pygame Framework")
+        self.tps = config.get("tps", 60)
 
         pygame.init()
-        pygame.display.set_caption(self._title)
-        self.display_surface = pygame.display.set_mode((self._width, self._height))
-        self._clock = pygame.time.Clock()
-        self._running = False
-        self._paused = False
-        self._speed = 1.0
+        pygame.display.set_caption(self.title)
+        self.display_surface = pygame.display.set_mode((self.width, self.height))
+        self.clock = pygame.time.Clock()
+        self.running = False
+        self.paused = False
+        self.speed = 1.0
 
         self.input_manager = InputManager()
         self.entity_manager = EntityManager()
@@ -41,7 +41,7 @@ class Scenario(ABC):
         return {
             "width": 1280,
             "height": 720,
-            "title": "My Awesome Game",
+            "title": "My Awesome Simulation",
             "tps": 60
         }
         """
@@ -57,23 +57,23 @@ class Scenario(ABC):
 
     def stop(self):
         """Stops the game loop, leading to a clean exit."""
-        self._running = False
+        self.running = False
 
     def pause(self):
         """Toggles the paused state of the game loop."""
-        self._paused = not self._paused
-        if not self._paused:
-            self._clock.tick(self._tps)
+        self.paused = not self.paused
+        if not self.paused:
+            self.clock.tick(self.tps)
 
     def set_speed(self, speed: float):
         """Sets the speed of the game."""
-        self._speed = speed
+        self.speed = speed
 
     def run(self):
         """Starts and manages the main game loop."""
-        self._running = True
-        while self._running:
-            raw_delta_time_ms = self._clock.tick(self._tps)
+        self.running = True
+        while self.running:
+            raw_delta_time_ms = self.clock.tick(self.tps)
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -86,12 +86,12 @@ class Scenario(ABC):
             if self.input_manager.is_pressed(pygame.K_ESCAPE):
                 self.stop()
             if self.input_manager.is_pressed(pygame.K_PLUS):
-                self.set_speed(self._speed + 0.2)
+                self.set_speed(self.speed + 0.2)
             if self.input_manager.is_pressed(pygame.K_MINUS):
-                self.set_speed(self._speed - 0.2)
+                self.set_speed(self.speed - 0.2)
 
-            if not self._paused:
-                delta_time = self._speed * raw_delta_time_ms / 1000.0
+            if not self.paused:
+                delta_time = self.speed * raw_delta_time_ms / 1000.0
 
                 self.entity_manager.apply_changes()
 
@@ -101,7 +101,7 @@ class Scenario(ABC):
                 for entity in self.entity_manager.get_entities():
                     entity.update(delta_time, self)
 
-            self.display_surface.fill((20, 0, 30) if self._paused else (0, 20, 30))
+            self.display_surface.fill((20, 0, 30) if self.paused else (0, 20, 30))
             for entity in self.entity_manager.get_entities():
                 entity.render(self.display_surface)
 
