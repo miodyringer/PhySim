@@ -1,6 +1,6 @@
-# PySim: Introduction
+# PhySim: Introduction
 
-PySim is a physics simulation framework built on top of Pygame. It provides a modular architecture for creating various types of physics scenarios, allowing you to easily define entities with properties like movement, mass, collision, and force reception.
+PhySim is a physics simulation framework built on top of Pygame. It provides a modular architecture for creating various types of physics scenarios, allowing you to easily define entities with properties like movement, mass, collision, and force reception.
 
 ## Features
 
@@ -33,7 +33,7 @@ pip install pygame
 Clone this repository:
 
 ```
-git clone https://github.com/miodyringer/physicssim.git
+git clone https://github.com/miodyringer/PhySim.git
 ```
 
 ## Creating a New Scenario
