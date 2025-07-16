@@ -74,7 +74,7 @@ class CircleOrbital(Orbital):
         if self.mass > 0:
             acceleration = self.force_accumulated / self.mass
             self.velocity += acceleration * delta_time
-        self.net_force_accumulated = pygame.Vector2(0, 0)
+        self.force_accumulated = pygame.Vector2(0, 0)
 
         self.velocity += self.pending_velocity_change
         self.position += self.pending_position_correction
@@ -83,3 +83,4 @@ class CircleOrbital(Orbital):
 
     def render(self, surface: pygame.Surface):
         self.shape.render_shape(surface, self.position, self.color)
+        pygame.draw.circle(surface, self.color, self.position, int(self.radius / (0.05) ** 0.5), 1)

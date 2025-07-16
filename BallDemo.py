@@ -1,4 +1,4 @@
-from random import random
+from random import random, randint
 
 import pygame
 
@@ -18,13 +18,20 @@ class BallDemo(Scenario):
             "width": 1024,
             "height": 768,
             "title": "Physics Demo",
-            "tps": 60
+            "tps": 360
         }
 
     def create_initial_entities(self):
-        for i in range(50):
-            ball = GravityCircle(random() * 1024, random() * 768, 10, (random() * 255, random() * 255, random() * 255),
-                                  pygame.Vector2(random() * 100, random() * 100), mass=1.0, restitution=0.3)
+        for i in range(200):
+            ball = GravityCircle(
+                x=randint(0, 1024),
+                y=randint(0, 768),
+                radius=10,
+                color=(random() * 255, random() * 255, random() * 255),
+                initial_velocity=pygame.Vector2(random() * 100, random() * 100),
+                mass=1.0,
+                restitution=0.3
+            )
             self.entity_manager.add(ball)
 
 if __name__ == "__main__":
