@@ -1,13 +1,13 @@
 import pygame
 
-from PySimEngine.Entity import Entity
-from PySimEngine.Scenario import Scenario
-from PySimObjects.SimpleObjects.Movable import Movable
-from PySimObjects.SimpleObjects.Collision import Collision
-from PySimObjects.SimpleObjects.Mass import Mass
-from PySimObjects.SimpleObjects.RecieveForce import ReceiveForce
-from PySimObjects.CircleShape import CircleShape
-from PySimObjects.SimpleObjects.ForceField import ForceField
+from PhySimEngine.Entity import Entity
+from PhySimEngine.Scenario import Scenario
+from PhySimObjects.SimpleObjects.Movable import Movable
+from PhySimObjects.SimpleObjects.Collision import Collision
+from PhySimObjects.SimpleObjects.Mass import Mass
+from PhySimObjects.SimpleObjects.RecieveForce import ReceiveForce
+from PhySimObjects.CircleShape import CircleShape
+from PhySimObjects.SimpleObjects.ForceField import ForceField
 
 
 class ForceFieldCircle(Entity, Movable, Collision, Mass, ReceiveForce):

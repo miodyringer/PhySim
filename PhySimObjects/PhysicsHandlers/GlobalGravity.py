@@ -1,6 +1,6 @@
-# PySimObjects/PhysicsHandlers/GlobalGravity.py
+# PhySimObjects/PhysicsHandlers/GlobalGravity.py
 import pygame
-from PySimObjects.SimpleObjects.Mass import Mass
+from PhySimObjects.SimpleObjects.Mass import Mass
 
 class GlobalGravity:
     """

@@ -2,12 +2,12 @@ from abc import abstractmethod, ABC
 import pygame
 
 # Import necessary base components
-from PySimEngine.Entity import Entity
-from PySimObjects.SimpleObjects.Movable import Movable
-from PySimObjects.SimpleObjects.Collision import Collision # Assuming 'Collision' is your Collidable
-from PySimObjects.SimpleObjects.Mass import Mass # Assuming 'Mass' is your HasMass
-from PySimObjects.SimpleObjects.RecieveForce import ReceiveForce # Assuming 'RecieveForce' is your ReceivesForce
-from PySimObjects.SimpleObjects.Shape import Shape # For Collision's __init__
+from PhySimEngine.Entity import Entity
+from PhySimObjects.SimpleObjects.Movable import Movable
+from PhySimObjects.SimpleObjects.Collision import Collision # Assuming 'Collision' is your Collidable
+from PhySimObjects.SimpleObjects.Mass import Mass # Assuming 'Mass' is your HasMass
+from PhySimObjects.SimpleObjects.RecieveForce import ReceiveForce # Assuming 'RecieveForce' is your ReceivesForce
+from PhySimObjects.SimpleObjects.Shape import Shape # For Collision's __init__
 
 class Orbital(Entity, Movable, Collision, Mass, ReceiveForce, ABC):
     """

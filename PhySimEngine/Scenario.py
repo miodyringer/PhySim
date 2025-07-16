@@ -2,8 +2,8 @@ from abc import abstractmethod, ABC
 
 import pygame
 
-from PySimEngine.EntityManager import EntityManager
-from PySimEngine.InputManager import InputManager
+from PhySimEngine.EntityManager import EntityManager
+from PhySimEngine.InputManager import InputManager
 
 
 class Scenario(ABC):

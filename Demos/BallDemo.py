@@ -2,9 +2,9 @@ from random import random, randint
 
 import pygame
 
-from PySimEngine.Scenario import Scenario
-from PySimObjects.GravityCircle import GravityCircle
-from PySimObjects.PhysicsHandlers.LocalGravity import LocalGravity
+from PhySimEngine.Scenario import Scenario
+from PhySimObjects.GravityCircle import GravityCircle
+from PhySimObjects.PhysicsHandlers.LocalGravity import LocalGravity
 
 
 class BallDemo(Scenario):

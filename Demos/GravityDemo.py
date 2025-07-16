@@ -2,10 +2,10 @@ import random
 
 import pygame
 
-from PySimEngine.Scenario import Scenario
-from PySimObjects.CircleOrbital import CircleOrbital
-from PySimObjects.GravityCircle import GravityCircle
-from PySimObjects.PhysicsHandlers.GlobalGravity import GlobalGravity
+from PhySimEngine.Scenario import Scenario
+from PhySimObjects.CircleOrbital import CircleOrbital
+from PhySimObjects.GravityCircle import GravityCircle
+from PhySimObjects.PhysicsHandlers.GlobalGravity import GlobalGravity
 
 
 class GravityDemo(Scenario):

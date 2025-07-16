@@ -1,11 +1,11 @@
 import pygame
 
 # Import necessary classes
-from PySimEngine.Scenario import Scenario # For game context (e.g., accessing global_gravity_handler)
-from PySimObjects.SimpleObjects.Orbital import Orbital # Inherit from our new Orbital base
-from PySimObjects.SimpleObjects.Collision import Collision # For type hinting resolve_collision
-from PySimObjects.CircleShape import CircleShape
-from PySimObjects.PhysicsHandlers.GlobalGravity import GlobalGravity
+from PhySimEngine.Scenario import Scenario # For game context (e.g., accessing global_gravity_handler)
+from PhySimObjects.SimpleObjects.Orbital import Orbital # Inherit from our new Orbital base
+from PhySimObjects.SimpleObjects.Collision import Collision # For type hinting resolve_collision
+from PhySimObjects.CircleShape import CircleShape
+from PhySimObjects.PhysicsHandlers.GlobalGravity import GlobalGravity
 
 
 class CircleOrbital(Orbital):

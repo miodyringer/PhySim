@@ -1,6 +1,6 @@
 from abc import abstractmethod, ABC
 
-from PySimObjects.SimpleObjects.Shape import Shape
+from PhySimObjects.SimpleObjects.Shape import Shape
 
 
 class Collision(ABC):

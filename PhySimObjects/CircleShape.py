@@ -1,5 +1,5 @@
 import pygame
-from PySimObjects.SimpleObjects.Shape import Shape
+from PhySimObjects.SimpleObjects.Shape import Shape
 
 class CircleShape(Shape):
     def __init__(self, radius: float):

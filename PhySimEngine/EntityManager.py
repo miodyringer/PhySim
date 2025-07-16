@@ -1,4 +1,4 @@
-from PySimEngine.Entity import Entity
+from PhySimEngine.Entity import Entity
 
 
 class EntityManager:

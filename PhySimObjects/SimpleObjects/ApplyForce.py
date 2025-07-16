@@ -1,7 +1,7 @@
 from abc import abstractmethod, ABC
 import pygame
 
-from PySimEngine.Entity import Entity
+from PhySimEngine.Entity import Entity
 
 
 class ApplyForce(ABC):

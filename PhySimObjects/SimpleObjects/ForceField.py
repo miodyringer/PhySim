@@ -1,6 +1,6 @@
 import pygame
-from PySimEngine.Entity import Entity
-from PySimObjects.SimpleObjects.ApplyForce import ApplyForce
+from PhySimEngine.Entity import Entity
+from PhySimObjects.SimpleObjects.ApplyForce import ApplyForce
 
 
 class ForceField(Entity, ApplyForce):

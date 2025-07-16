@@ -2,9 +2,9 @@
 import pygame
 import random
 
-from PySimEngine.Scenario import Scenario
-from PySimObjects.ForceFieldCircle import ForceFieldCircle
-from PySimObjects.SimpleObjects.ForceField import ForceField
+from PhySimEngine.Scenario import Scenario
+from PhySimObjects.ForceFieldCircle import ForceFieldCircle
+from PhySimObjects.SimpleObjects.ForceField import ForceField
 
 
 class ForceFieldDemo(Scenario):
